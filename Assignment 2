@@ -1,1 +1,491 @@
+						Assignment 2
+
+
+===================================================================================================================================
+
+1. Write a script to create 10 directories, say a1,a2,...,a10
+Report error if a directory/file exists with the same name.
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 1.sh
+#!/bin/bash
+
+	echo "Enter No."
+	read num
+	for(( i=1 ; i<=num ; i++ ))
+	do
+		mkdir a$i
+	done
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ bash 1.sh
+Enter No.
+10
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ ls
+1.sh  a1  a10  a2  a3  a4  a5  a6  a7  a8  a9
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ bash 1.sh
+Enter No.
+10
+mkdir: cannot create directory ‘a1’: File exists
+mkdir: cannot create directory ‘a2’: File exists
+mkdir: cannot create directory ‘a3’: File exists
+mkdir: cannot create directory ‘a4’: File exists
+mkdir: cannot create directory ‘a5’: File exists
+mkdir: cannot create directory ‘a6’: File exists
+mkdir: cannot create directory ‘a7’: File exists
+mkdir: cannot create directory ‘a8’: File exists
+mkdir: cannot create directory ‘a9’: File exists
+mkdir: cannot create directory ‘a10’: File exists
+
+===================================================================================================================================
+
+2. Write a menu based script to perform following string operations
+a) To find length of a string
+c) Copying string
+d) Concatenation of strings
+e) Compare two strings
+f) Reversing a string
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+echo "1. To find length of a string"
+echo "2. Copying string"
+echo "3. Concatenation of strings"
+echo "4. Compare two strings"
+echo "5. Reversing a string"
+echo "Please enter your choice"
+read ch
+echo ""
+
+case $ch in
+        1)
+                echo "Enter String : "
+                read str
+                length=${#str}
+                echo "Length of $str is $length";;
+        2)
+                echo "Enter String : "
+                read str
+                cpystr=$str
+                echo "copied string is $cpystr ";;
+        3)
+                echo "Enter first string :"
+                read str1
+                echo "Enter second string :"
+                read str2
+                resultstr="$str1 $str2"
+                echo "$resultstr";;
+        4)
+                echo "Enter first string :"
+                read str1
+                echo "Enter second string :"
+                read str2
+                if [ $str1 != $str2 ];then
+                        echo "$str1 is not equal to  $str2"
+                else
+                        echo "$str1 is same as $str2"
+                fi;;
+        5)
+                echo "Enter a String :"
+                read str
+		echo $str | rev
+
+                ;;
+        *)
+                echo "Invalid Option"
+esac
+
+===================================================================================================================================
+
+3.Write a shell script to rename all files in the current directory with numeric continuous value(Warning: Do this in a personal folder. Don't use Home directory) 
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+ls -v | cat -n | while read n Udit; do mv -n "$Udit" "$n Udit.ext"; done
+
+===================================================================================================================================
+
+4. Write a script that print environment variable(Print $HOME,$PATH,$SHELL,$HISTORY,$LOGNAME,$TERM)
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+echo $HOME
+echo $PATH
+echo $SHELL
+echo $HISTORY
+echo $LOGNAME
+echo $TERM
+
+===================================================================================================================================
+
+5. Write a shell script to print all files permissions in current directory(Not name or other details)(Use cut commands)
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+ls -la | cut -b 1-10
+ls -la | cut -c 1-10
+
+===================================================================================================================================
+
+6. Write a shell script to print all files permissions and name of file
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+ls -l | cut -d ' ' -f 1
+
+===================================================================================================================================
+
+7.Write a shell script to print all files name and size greater than 5K
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+ls -l | awk '{ print $1 }' 
+
+===================================================================================================================================
+
+1. Write a script To check given year is leap or not.
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+echo "enter Year :"
+read yr
+if [ $((yr%400)) -eq 0 ];then
+        echo "leap year"
+elif [ $((yr%100)) -ne 0 ];then
+        echo "Not a leap year"
+elif [ $((yr%4)) -eq 0 ];then
+        echo "Leap Year"
+else
+        echo "not a leap year"
+fi
+
+===================================================================================================================================
+
+2. Write a script to print day of the week using
+	a) elif	b) case 
+
+Answer :- 
+
+A)
+
+  ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+  #!/bin/bash
+  
+	echo 'Enter the no of Day : '
+	read day
+
+	if [ $day == 1 ]
+	then
+		echo 'Sunday'
+	elif [ $day == 2 ]
+	then
+		echo 'Monday'
+	elif [ $day == 3 ]
+	then
+		echo 'Tuesday'
+	elif [ $day == 4 ]
+	then
+		echo 'Wednesday'
+	elif [ $day == 5 ]
+	then
+		echo 'Thrusday'
+	elif [ $day == 6 ]
+	then
+		echo 'Friday'
+	elif [ $day == 7 ]
+	then
+		echo 'Saturday'
+	else
+		echo 'Invalid Entry'
+	fi
+
+B)
+
+  ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+  #!/bin/bash
+
+	echo "Enter the number of day"
+	read daynum
+	case $daynum in
+        	1) echo "Monday";;
+        	2) echo "Tuesday";;
+        	3) echo "Wednessday";;
+        	4) echo "Thursday";;
+        	5) echo "Friday";;
+        	6) echo "Saturday";;
+        	7) echo "Sunday";;
+        	*) echo "Invalid Input";;
+	esac
+
+===================================================================================================================================
+
+3. a) Write a script to find biggest of three no.s
+   b) To find avg of 3 no.s, read no.s from keyboard
+
+Answer :- 
+
+A)
+
+  ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+  #!/bin/bash
+	
+  echo "Enter first number "
+	read n1
+	echo "Enter Second number"
+	read n2
+	echo "Enter third number"
+	read n3
+	if [ $n1 -gt $n2 ] && [ $n1 -gt $n3 ];then
+	        echo "$n1 is the gratest number"
+	elif [ $n2 -gt $n1 ] && [ $n2 -gt $n3 ];then
+	        echo "$n2 is the greatest number"
+	else
+      	 	echo "$n3 is the greatest"
+
+	fi
+
+B)
+
+  ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+  #!/bin/bash
+  
+	echo "Enter first number"
+	read n1
+	echo "Enter second number"
+	read n2
+	echo "Enter third number"
+	read n3
+	find_avg()
+	{
+ 	       sum=`expr $n1 + $n2 + $n3`
+ 	       avg=`expr $sum / 3`
+ 	       echo "Average is $avg"
+	}
+
+	find_avg
+
+===================================================================================================================================
+
+4. Write a program to check wahether given no.is even or odd
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+echo "Enter number "
+read n1
+rem=$(( $n1 % 2))
+if [ $rem -eq 0 ];then
+        echo "$n1 is even"
+else
+	echo "$n1 is odd"
+fi
+
+===================================================================================================================================
+
+5. Write a program to print calendar of current month in next year,previous years.
+	For eg:-sep 2014,sep 2012 if current month is sep 2013	
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+mon=$(date | awk '{print $3}')
+year=$(date | awk '{print $4}')
+
+let "prev=year-1" "next=year+1"
+
+cal $mon $prev
+cal $mon $year
+cal $mon $next
+
+===================================================================================================================================
+
+6. Write a program to find sum and product of two no.s using 
+	a) let 
+	b)expr
+	c)bc	
+
+Answer :- 
+
+ ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+  #!/bin/bash
+
+	echo 'Enter num1 : '
+	read num1
+	echo 'Enter num2 : '
+	read num2
+
+	let "prodlet=num1*num2"
+
+	prodExp=$(expr $num1 \* $num2)
+
+	echo 'Let : '
+	echo $prodlet 
+	echo 'Expr : '
+	echo $prodExp
+	echo 'BC : '
+	echo $num1 \* $num2 | bc
+
+===================================================================================================================================
+
+7. Write a script to generate Fibonacci series.
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+N=6
+a=0
+b=1  
+   
+echo "The Fibonacci series is : "
+   
+for (( i=0; i<N; i++ )) 
+do
+    echo -n "$a "
+    fn=$((a + b)) 
+    a=$b 
+    b=$fn 
+done
+
+===================================================================================================================================
+
+8. Write a shell script to reverse the single strings. 
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+echo "Enter a String :"
+read str
+reverse=$str | rev
+echo "$reverse"
+
+===================================================================================================================================
+
+9.Write a shell script to reverse the list of strings and reverse each string further in the list.
+
+Answer :- 
+
+  ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+  #!/bin/bash
+
+	echo 'Enter array of Strings : '
+	read -a arr
+
+	min=0
+	max=`expr ${#arr[@]} - 1`
+	x=$max
+	while (( $min <= $max ))
+	do
+		newArr[$min]=${arr[$max]}
+		newArr[$max]=${arr[$min]}
+		(( min++ ))
+		(( max-- ))
+	done
+
+	max=$x
+
+	for (( i=0; i<=max; i++ ))
+	do
+		rev=""
+		str=${newArr[$i]}
+		let "len=${#str} -1"
+		for (( j=$len; j>=0; j-- ))
+		do
+			rev="$rev${str:$j:1}"
+		done
+		newArr[$i]=$rev
+	done
+
+	echo ${newArr[@]}
+
+===================================================================================================================================
+
+10. Write a shell script to print the reverse of an input number.
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+echo "Enter number : "
+read n 
+sd=0
+rev="" 
+on=$n
+while [ $n -gt 0 ]
+do
+    sd=$(( $n % 10 )) 
+    n=$(( $n / 10 ))  
+    rev=$( echo ${rev}${sd} ) 
+done
+ 
+echo  "$on in a reverse order $rev"
+
+===================================================================================================================================
+
+1.Write a shell script to validate password strength. Here are a few assumptions for the password string.
+Length  – minimum of 8 characters.
+Contain both alphabet and number.
+Include both the small and capital case letters.
+If the password doesn’t comply with any of the above conditions, then the script should report it as a <Weak Password>.
+
+Answer :- 
+
+ubuntu@ubuntu-Lenovo-G580:~/OS_Programs$ cat > 2.sh
+#!/bin/bash
+
+echo "enter the password"
+read password
+len="${#password}"
+if test $len -ge 8 ; then
+    echo "$password" | grep -q [0-9]
+     if test $? -eq 0 ; then
+           echo "$password" | grep -q [A-Z]
+                if test $? -eq 0 ; then
+                    echo "$password" | grep -q [a-z]   
+                      if test $? -eq 0 ; then
+                       echo "Strong password"
+                   else
+                      echo "weak password include lower case char"
+                   fi
+            else
+              echo "weak password include capital char" 
+            fi
+     else
+       echo "please include the numbers in password it is weak password"   
+     fi
+else
+    echo "password lenght should be greater than or equal 8 hence weak password"
+fi
+
+===================================================================================================================================
 
